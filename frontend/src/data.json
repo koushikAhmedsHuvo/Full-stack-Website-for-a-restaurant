@@ -1,0 +1,486 @@
+{
+  "heading1": "Crafting your",
+  "heading2": "Exceptional ",
+  "heading3": "Dining",
+  "heading4": "Reservations",
+  "heading5": "Some Traditional Food Based on Location",
+  "paragraph": "Reservation is a step into a world of gastronomic wonder. Reserve your table today and let us paint your culinary dreams into reality.",
+  "logo": {
+    "src": "../assets/logo.svg",
+    "alt": "Logo"
+  },
+  "menu": [
+    {
+      "name": "Home",
+      "url": "/"
+    },
+    {
+      "name": "Menu",
+      "url": "/menu"
+    },
+    {
+      "name": "Pages",
+      "dropdown": [
+        { "title": "About Us", "url": "/aboutus" },
+        { "title": "Contact Us", "url": "/contactus" },
+        { "title": "Privacy & Policy", "url": "/privacy" }
+      ]
+    },
+    {
+      "name": "User Dashboard",
+      "url": "/user"
+    }
+  ],
+  "buttons": [
+    {
+      "text": "Login",
+      "value": true,
+      "path": "/login"
+    },
+    {
+      "text": "SignUp",
+      "value": false,
+      "path": "/signup"
+    }
+  ],
+  "buttons1": [
+    {
+      "text": "Delivery",
+      "icon": "FaCaravan",
+      "value": true
+    },
+    {
+      "text": "Pick Up",
+      "icon": "CiLocationOn",
+      "value": false
+    },
+    {
+      "text": "Restaurant",
+      "icon": "TfiHome",
+      "value": false
+    }
+  ],
+  "buttons3": [
+    {
+      "text": "All Category",
+      "value": true
+    },
+    {
+      "text": "Thai Cuisine",
+      "value": false
+    },
+    {
+      "text": "Mexican",
+      "value": false
+    },
+    {
+      "text": "Italian",
+      "value": false
+    },
+    {
+      "text": "Vegetarian",
+      "value": false
+    },
+    {
+      "text": "Junk Food",
+      "value": false
+    }
+  ],
+  "slogan": {
+    "dropdownData": {
+      "title": "Dropdown Title",
+      "items": [
+        { "title": "Item 1", "url": "/item1" },
+        { "title": "Item 2", "url": "/item2" },
+        { "title": "Item 3", "url": "/item3" }
+      ]
+    },
+    "sloganText": "It's the last day to save. The skills for now-",
+    "sloganLink": {
+      "text": "now on sale.",
+      "url": "#"
+    },
+    "phoneNumber": "+8801703375052",
+    "email": "koushika608@gmail.com"
+  },
+  "foodItems": [
+    {
+      "id": 7,
+      "title": "Eggplant Parmesan & Linguine",
+      "image": "https://i.ibb.co/g3dMFvD/food1.png",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "link": "#",
+      "Price": 20,
+      "button": "Add to Cart"
+    },
+    {
+      "id": 8,
+      "title": "BBQ Pulled Pork Sandwich",
+      "image": "https://i.ibb.co/fD2Jwf9/food2.png",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "link": "#",
+      "Price": 20,
+      "button": "Add to Cart"
+    },
+    {
+      "id": 9,
+      "title": "Quinoa-Stuffed Bell Pepper",
+      "image": "https://i.ibb.co/7z3vPDG/food3.png",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "link": "#",
+      "Price": 20,
+      "button": "Add to Cart"
+    },
+    {
+      "id": 10,
+      "title": "Baked Chicken Wings and Legs",
+      "image": "https://i.ibb.co/Gn7Dt8h/food4.png",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "link": "#",
+      "Price": 20,
+      "button": "Add to Cart"
+    },
+    {
+      "id": 11,
+      "title": "Fish Tacos with Chipotle Crema",
+      "image": "https://i.ibb.co/5sScxG2/food5.png",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "link": "#",
+      "Price": 20,
+      "button": "Add to Cart"
+    },
+    {
+      "id": 12,
+      "title": "Pork Chop with Apple Chutney",
+      "image": "https://i.ibb.co.com/MC8y36m/featured-3-9d584dcf.png",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "link": "#",
+      "Price": 20,
+      "button": "Add to Cart"
+    }
+  ],
+  "Crafting": {
+    "banner": {
+      "src": "https://i.ibb.co/8bktdNK/banner1.png",
+      "alt": "banner"
+    },
+    "heroImage": {
+      "src": "https://i.ibb.co/4g9qBfQ/sideimg.png",
+      "alt": "heroimg"
+    },
+    "heading": {
+      "text": "The Process of Crafting your Dining Experience"
+    },
+    "boxes": [
+      {
+        "icon": "CiLocationOn",
+        "heading": "Set your location",
+        "description": "A high-quality solution beautifully crafted for customers."
+      },
+      {
+        "icon": "PiHandCoins",
+        "heading": "Choose your food",
+        "description": "Explore our menu and select your favorite dishes."
+      },
+      {
+        "icon": "HiOutlineDevicePhoneMobile",
+        "heading": "Enjoy your meal",
+        "description": "Delight in a memorable dining experience with us."
+      },
+      {
+        "icon": "FaCaravan",
+        "heading": "Enjoy your meal",
+        "description": "Delight in a memorable dining experience with us."
+      }
+    ]
+  },
+  "Popular": {
+    "title": "Most Popular Items",
+    "items": [
+      {
+        "id": 1,
+        "title": "Quinoa-Stuffed Bell Pepper",
+        "description1": "4 Piece Chicken",
+        "description2": "Spicy Sauce",
+        "price": "30",
+        "image": "https://i.ibb.co/mbSqCgb/popular-1-725ae64e.png"
+      },
+      {
+        "id": 1,
+        "title": "Quinoa-Stuffed Bell Pepper",
+        "description1": "4 Piece Chicken",
+        "description2": "Spicy Sauce",
+        "price": "30",
+        "image": "https://i.ibb.co/dG0nQky/popular-2-d80586b9.png"
+      },
+      {
+        "id": 3,
+        "title": "Quinoa-Stuffed Bell Pepper",
+        "description1": "4 Piece Chicken",
+        "description2": "Spicy Sauce",
+        "price": "30",
+        "image": "https://i.ibb.co/xhRBZn8/popular-3-ce0af9a8.png"
+      },
+      {
+        "id": 4,
+        "title": "Quinoa-Stuffed Bell Pepper",
+        "description1": "4 Piece Chicken",
+        "description2": "Spicy Sauce",
+        "price": "30",
+        "image": "https://i.ibb.co/s3hLvwj/popular-4-02f7e53b.png"
+      },
+      {
+        "id": 5,
+        "title": "Quinoa-Stuffed Bell Pepper",
+        "description1": "4 Piece Chicken",
+        "description2": "Spicy Sauce",
+        "price": "30",
+        "image": "https://i.ibb.co/54YD5t0/popular-5-a648c9c2.png"
+      },
+      {
+        "id": 6,
+        "title": "Quinoa-Stuffed Bell Pepper",
+        "description1": "4 Piece Chicken",
+        "description2": "Spicy Sauce",
+        "price": "30",
+        "image": "https://i.ibb.co/BjqBqcf/popular-6-1db49790.png"
+      }
+    ]
+  },
+  "customerSay": {
+    "title": "What’s Our Customer Say",
+    "bgImage": "https://i.ibb.co/fF0hVwz/download.png",
+    "reviews": [
+      {
+        "image": "https://i.ibb.co/TtvBMyB/customer-1.png",
+        "reviewText": "An absolute foodie's paradise! The flavors at ReservQ are a symphony of delight. Every bite tells a story of passion and skill. A must-visit for anyone seeking beyond compare.",
+        "author": "Jonson Roy",
+        "occupation": "Job holder"
+      },
+      {
+        "image": "https://i.ibb.co/xMtQYyz/customer-2-f6010a44.png",
+        "reviewText": "An absolute foodie's paradise! The flavors at ReservQ are a symphony of delight. Every bite tells a story of passion and skill. A must-visit for anyone seeking beyond compare.",
+        "author": "David Ethic",
+        "occupation": "Job holder"
+      },
+      {
+        "image": "https://i.ibb.co/Dp5xvd7/customer-3-f496f7a0.png",
+        "reviewText": "An absolute foodie's paradise! The flavors at ReservQ are a symphony of delight. Every bite tells a story of passion and skill. A must-visit for anyone seeking beyond compare.",
+        "author": "Robert Fox",
+        "occupation": "Job holder"
+      }
+    ]
+  },
+  "Resturant": {
+    "backgroundImage": "https://i.ibb.co/yk4LbRk/bg.png",
+    "title": "Find out Better Restaurant Food Experience",
+    "description": "We've done it carefully and simply. Combined with the ingredients makes for beautiful landings.",
+    "buttons": [
+      {
+        "text": "App Store",
+        "icon": "https://i.ibb.co/s1xmFRs/apple.png",
+        "backgroundColor": "bg-black text-white"
+      },
+      {
+        "text": "Google Play",
+        "icon": "https://i.ibb.co/2Nc577P/google.png",
+        "backgroundColor": "bg-white text-black "
+      }
+    ],
+    "image": {
+      "src": "https://i.ibb.co/QJnYTty/restaurant.png",
+      "alt": "Restaurant"
+    }
+  },
+  "Footer": {
+    "backgroundImage": "https://i.ibb.co/pQ2qbcz/footer.png",
+    "logo": {
+      "src": "../assets/logo.svg",
+      "alt": "logo",
+      "width": "w-32"
+    },
+    "description": "At ReservQ, we invite you to embark on a journey of taste and delight. Our tables are more than just places.",
+    "socialMedia": [
+      {
+        "platform": "Facebook",
+        "icon": "FaFacebookF",
+        "url": "#",
+        "hoverColor": "hover:text-blue-500"
+      },
+      {
+        "platform": "Twitter",
+        "icon": "FaTwitter",
+        "url": "#",
+        "hoverColor": "hover:text-blue-400"
+      },
+      {
+        "platform": "Instagram",
+        "icon": "FaInstagram",
+        "url": "#",
+        "hoverColor": "hover:text-pink-500"
+      },
+      {
+        "platform": "LinkedIn",
+        "icon": "FaLinkedin",
+        "url": "#",
+        "hoverColor": "hover:text-blue-700"
+      }
+    ],
+    "quickLinks": {
+      "title": "Quick Links",
+      "links": [
+        {
+          "text": "My Account",
+          "url": "#",
+          "hoverColor": "hover:text-red-500"
+        },
+        {
+          "text": "Reservations",
+          "url": "#",
+          "hoverColor": "hover:text-red-500"
+        },
+        { "text": "Menu", "url": "#", "hoverColor": "hover:text-red-500" },
+        {
+          "text": "Contact Us",
+          "url": "#",
+          "hoverColor": "hover:text-red-500"
+        },
+        { "text": "About Us", "url": "#", "hoverColor": "hover:text-red-500" }
+      ]
+    },
+    "termsPrivacy": {
+      "title": "Terms & Privacy",
+      "links": [
+        {
+          "text": "Terms of Service",
+          "url": "#",
+          "hoverColor": "hover:text-red-500"
+        },
+        {
+          "text": "Privacy Policy",
+          "url": "#",
+          "hoverColor": "hover:text-red-500"
+        },
+        {
+          "text": "Cookie Policy",
+          "url": "#",
+          "hoverColor": "hover:text-red-500"
+        },
+        {
+          "text": "Refund Policy",
+          "url": "#",
+          "hoverColor": "hover:text-red-500"
+        },
+        { "text": "Support", "url": "#", "hoverColor": "hover:text-red-500" }
+      ]
+    },
+    "newsletter": {
+      "title": "Subscribe to our Newsletter",
+      "placeholder": "Enter your email",
+      "buttonText": "Subscribe",
+
+      "paymentMethods": {
+        "text": "We accept payment methods:",
+        "images": [
+          {
+            "src": "https://i.ibb.co/vx6B76z/visa.png",
+            "alt": "Visa",
+            "width": "w-12"
+          },
+          {
+            "src": "https://i.ibb.co/vx6B76z/visa.png",
+            "alt": "Visa",
+            "width": "w-12"
+          },
+          {
+            "src": "https://i.ibb.co/vx6B76z/visa.png",
+            "alt": "Visa",
+            "width": "w-12"
+          },
+          {
+            "src": "https://i.ibb.co/vx6B76z/visa.png",
+            "alt": "Visa",
+            "width": "w-12"
+          }
+        ]
+      }
+    }
+  },
+
+  "faqs": [
+    {
+      "question": "What type of cuisine does your restaurant offer?",
+      "answer": "We offer [insert type of cuisine, e.g., Italian, Asian fusion, Mediterranean] cuisine that combines traditional flavors with modern twists."
+    },
+    {
+      "question": "What are your opening hours?",
+      "answer": "Our restaurant is open from 10 AM to 10 PM from Monday to Saturday, and from 11 AM to 8 PM on Sundays."
+    },
+    {
+      "question": "Do you offer vegetarian or vegan options?",
+      "answer": "Yes, we offer a variety of vegetarian and vegan options. Please ask our staff for more details."
+    },
+    {
+      "question": "Do you take reservations?",
+      "answer": "Yes, we take reservations. You can reserve a table through our website or by calling us directly."
+    }
+  ],
+  "images": [
+    {
+      "src": "https://i.ibb.co/KVhk4Mw/faq-1.png",
+      "alt": "FAQ 1",
+      "style": "rounded-lg w-full h-48 object-cover shadow-lg"
+    },
+    {
+      "src": "https://i.ibb.co/kckLnV0/faq-2.png",
+      "alt": "FAQ 2",
+      "style": "rounded-lg w-1/2 h-48 object-cover shadow-lg"
+    },
+    {
+      "src": "https://i.ibb.co/s1M0Lyv/faq-3.png",
+      "alt": "FAQ 3",
+      "style": "rounded-lg w-1/2 h-48 object-cover shadow-lg -mr-8"
+    },
+    {
+      "src": "https://i.ibb.co/kByXWTn/faq-4.png",
+      "alt": "FAQ 4",
+      "style": "rounded-lg w-full h-48 object-cover shadow-lg -ml-16"
+    }
+  ],
+
+  "Categories": {
+    "title": "Our Categories",
+    "categories": [
+      {
+        "title": "Delish Burger",
+        "itemCount": 25,
+        "icon": "PiHamburger"
+      },
+      {
+        "title": "Delish Burger",
+        "itemCount": 25,
+        "icon": "PiHamburger"
+      },
+      {
+        "title": "Delish Burger",
+        "itemCount": 25,
+        "icon": "PiHamburger"
+      },
+      {
+        "title": "Delish Burger",
+        "itemCount": 25,
+        "icon": "PiHamburger"
+      }
+    ],
+    "promoBanners": [
+      {
+        "image": "https://i.ibb.co/SB9bHZ2/Promo-Banner.png",
+        "alt": "Promo Banner 1"
+      },
+      {
+        "image": "https://i.ibb.co/MBbzWvc/Promo-Banner-2.png",
+        "alt": "Promo Banner 2"
+      }
+    ]
+  }
+}

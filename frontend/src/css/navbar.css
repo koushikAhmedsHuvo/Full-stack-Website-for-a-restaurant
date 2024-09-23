@@ -1,0 +1,19 @@
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%; /* Start below the menu item */
+  left: 0;
+  background-color: #333; /* Adjust as needed */
+  color: white;
+  width: 200px; /* Adjust as needed */
+  overflow: hidden; /* Hide content initially */
+  max-height: 0; /* Initially, the height is 0 */
+  transition: max-height 0.3s ease; /* Transition max-height property */
+}
+
+.dropdown-visible {
+  max-height: 200px; /* Adjust the maximum height as needed */
+}

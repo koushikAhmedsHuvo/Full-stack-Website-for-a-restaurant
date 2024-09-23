@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100');
+
+.categoryCard {
+  position: relative;
+  overflow: hidden;
+  transition: 0.2s transform ease-in-out;
+  will-change: transform;
+  z-index: 0;
+}
+
+.categoryCard::after {
+  background-color: #f01543;
+
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-100%, 0) rotate(1deg);
+  transform-origin: top left;
+  transition: 0.2s transform ease-out;
+  will-change: transform;
+  z-index: -1;
+}
+
+.categoryCard:hover::after {
+  transform: translate(0, 0);
+}
+
+.categoryCard:hover {
+  transform: scale(1.05);
+  will-change: transform;
+}
