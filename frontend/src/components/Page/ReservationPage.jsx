@@ -1,19 +1,18 @@
 import React from 'react';
 import Navbar from '../Home1/Navbar';
-import Menu1 from '../Home1/Menu1';
+import Reservation2 from '../Home1/Reservation2';
+import Reservation from '../Home1/Reservation';
 import Faq from '../Home1/Faq';
 import Resturant from '../Home1/Resturant';
 import Footer from '../Home1/Footer';
 import CopyRight from '../Home1/CopyRight';
 
-import Menu from '../Home1/Menu';
-
-const MenuPage = () => {
+const ReservationPage = () => {
   return (
     <div>
       <Navbar />
-      <Menu1 />
-      <Menu />
+      <Reservation2 />
+      <Reservation />
       <Faq />
       <Resturant />
       <Footer />
@@ -22,4 +21,4 @@ const MenuPage = () => {
   );
 };
 
-export default MenuPage;
+export default ReservationPage;

@@ -20,7 +20,7 @@ const Faq = () => {
         backgroundSize: 'cover',
       }}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto mb-16">
         <h1 className="text-2xl w-full md:text-5xl leading-tight font-bold md:w-1/3 ml-5 mt-10 mb-8">
           Foodie FAQ: Your Culinary Queries Answered
         </h1>

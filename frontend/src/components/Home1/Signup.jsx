@@ -10,6 +10,11 @@ const Signup = () => {
 
   const [formData, setFormData] = useState({
     username: '',
+    firstname: '',
+    lastname: '',
+    telephone: '',
+    city: '',
+    address: '',
     email: '',
     password: '',
   });
@@ -87,7 +92,7 @@ const Signup = () => {
             <div className="text-green-500 mb-4">{successMessage}</div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 mb-16">
             <div>
               <label
                 htmlFor="username"
@@ -105,6 +110,97 @@ const Signup = () => {
                 required
               />
             </div>
+
+            <div>
+              <label
+                htmlFor="firstname"
+                className="block text-sm font-medium text-gray-700"
+              >
+                {rightSection1.firstnameLabel}
+              </label>
+              <input
+                type="text"
+                id="firstname"
+                placeholder={rightSection1.firstnamePlaceholder}
+                value={formData.firstname}
+                onChange={handleInputChange}
+                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                required
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="lastname"
+                className="block text-sm font-medium text-gray-700"
+              >
+                {rightSection1.lastnameLabel}
+              </label>
+              <input
+                type="text"
+                id="lastname"
+                placeholder={rightSection1.lastnamePlaceholder}
+                value={formData.lastname}
+                onChange={handleInputChange}
+                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                required
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="telephone"
+                className="block text-sm font-medium text-gray-700"
+              >
+                {rightSection1.telephoneLabel}
+              </label>
+              <input
+                type="text"
+                id="telephone"
+                placeholder={rightSection1.telephonePlaceholder}
+                value={formData.telephone}
+                onChange={handleInputChange}
+                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                required
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="city"
+                className="block text-sm font-medium text-gray-700"
+              >
+                {rightSection1.cityLabel}
+              </label>
+              <input
+                type="text"
+                id="city"
+                placeholder={rightSection1.cityPlaceholder}
+                value={formData.city}
+                onChange={handleInputChange}
+                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                required
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="address"
+                className="block text-sm font-medium text-gray-700"
+              >
+                {rightSection1.addressLabel}
+              </label>
+              <input
+                type="text"
+                id="address"
+                placeholder={rightSection1.addressPlaceholder}
+                value={formData.address}
+                onChange={handleInputChange}
+                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                required
+              />
+            </div>
+
             <div>
               <label
                 htmlFor="email"
@@ -122,6 +218,7 @@ const Signup = () => {
                 required
               />
             </div>
+
             <div>
               <label
                 htmlFor="password"

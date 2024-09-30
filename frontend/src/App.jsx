@@ -9,6 +9,8 @@ import PrivacyPage from './components/Page/PrivacyPage';
 import MenuPage from './components/Page/MenuPage';
 import UserPage from './components/Page/UserPage';
 import Cart from './components/Page/Cart';
+import PickupPage from './components/Page/PickupPage';
+import ReservationPage from './components/Page/ReservationPage';
 
 const App = () => {
   return (
@@ -24,6 +26,8 @@ const App = () => {
           <Route path="/menu" element={<MenuPage />} />
           <Route path="/user" element={<UserPage />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/reserve" element={<ReservationPage />} />
+          <Route path="/pickup" element={<PickupPage />} />
         </Routes>
       </Router>
     </>

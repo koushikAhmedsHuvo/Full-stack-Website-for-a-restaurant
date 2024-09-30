@@ -47,16 +47,19 @@
     {
       "text": "Delivery",
       "icon": "FaCaravan",
+      "path": "/menu",
       "value": true
     },
     {
       "text": "Pick Up",
       "icon": "CiLocationOn",
+      "path": "/pickup",
       "value": false
     },
     {
-      "text": "Restaurant",
+      "text": "In Restaurant",
       "icon": "TfiHome",
+      "path": "/reserve",
       "value": false
     }
   ],
@@ -118,7 +121,7 @@
       "title": "BBQ Pulled Pork Sandwich",
       "image": "https://i.ibb.co/fD2Jwf9/food2.png",
       "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
-      "link": "#",
+
       "Price": 20,
       "button": "Add to Cart"
     },
@@ -127,7 +130,7 @@
       "title": "Quinoa-Stuffed Bell Pepper",
       "image": "https://i.ibb.co/7z3vPDG/food3.png",
       "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
-      "link": "#",
+
       "Price": 20,
       "button": "Add to Cart"
     },
@@ -136,7 +139,7 @@
       "title": "Baked Chicken Wings and Legs",
       "image": "https://i.ibb.co/Gn7Dt8h/food4.png",
       "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
-      "link": "#",
+
       "Price": 20,
       "button": "Add to Cart"
     },
@@ -145,7 +148,7 @@
       "title": "Fish Tacos with Chipotle Crema",
       "image": "https://i.ibb.co/5sScxG2/food5.png",
       "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
-      "link": "#",
+
       "Price": 20,
       "button": "Add to Cart"
     },
@@ -154,7 +157,7 @@
       "title": "Pork Chop with Apple Chutney",
       "image": "https://i.ibb.co.com/MC8y36m/featured-3-9d584dcf.png",
       "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
-      "link": "#",
+
       "Price": 20,
       "button": "Add to Cart"
     }
@@ -200,48 +203,48 @@
       {
         "id": 1,
         "title": "Quinoa-Stuffed Bell Pepper",
-        "description1": "4 Piece Chicken",
-        "description2": "Spicy Sauce",
+        "description1": "Some quick example text to build on the card title",
+
         "price": "30",
         "image": "https://i.ibb.co/mbSqCgb/popular-1-725ae64e.png"
       },
       {
-        "id": 1,
+        "id": 2,
         "title": "Quinoa-Stuffed Bell Pepper",
-        "description1": "4 Piece Chicken",
-        "description2": "Spicy Sauce",
+
+        "description2": "Some quick example text to build on the card title",
         "price": "30",
         "image": "https://i.ibb.co/dG0nQky/popular-2-d80586b9.png"
       },
       {
         "id": 3,
         "title": "Quinoa-Stuffed Bell Pepper",
-        "description1": "4 Piece Chicken",
-        "description2": "Spicy Sauce",
+        "description1": "Some quick example text to build on the card title",
+
         "price": "30",
         "image": "https://i.ibb.co/xhRBZn8/popular-3-ce0af9a8.png"
       },
       {
         "id": 4,
         "title": "Quinoa-Stuffed Bell Pepper",
-        "description1": "4 Piece Chicken",
-        "description2": "Spicy Sauce",
+        "description1": "Some quick example text to build on the card title",
+
         "price": "30",
         "image": "https://i.ibb.co/s3hLvwj/popular-4-02f7e53b.png"
       },
       {
         "id": 5,
         "title": "Quinoa-Stuffed Bell Pepper",
-        "description1": "4 Piece Chicken",
-        "description2": "Spicy Sauce",
+        "description1": "Some quick example text to build on the card title",
+
         "price": "30",
         "image": "https://i.ibb.co/54YD5t0/popular-5-a648c9c2.png"
       },
       {
         "id": 6,
         "title": "Quinoa-Stuffed Bell Pepper",
-        "description1": "4 Piece Chicken",
-        "description2": "Spicy Sauce",
+        "description1": "Some quick example text to build on the card title",
+
         "price": "30",
         "image": "https://i.ibb.co/BjqBqcf/popular-6-1db49790.png"
       }

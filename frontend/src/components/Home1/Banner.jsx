@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import bannerImage from '../../assets/banner.png';
 import '../../css/buttonStyle.css';
 import jsonData from '../../data.json';
+import { Link } from 'react-router-dom';
 
 const Banner = () => {
   const [techs, setTechs] = useState({});
@@ -35,7 +36,8 @@ const Banner = () => {
           {techs.buttons1 &&
             techs.buttons1.map((button, index) => (
               <div key={index} className="w-48 lg:p-2 lg:mt-0 mt-2">
-                <button
+                <Link
+                  to={button.path}
                   className={`flex items-center justify-center w-full text-black px-3 py-4 rounded-lg border border-primary-color btn btn2 transition duration-500 ease-in-out  hover:bg-red-600 hover:border-red-600 ${
                     button.value
                       ? 'bg-primary-color hover:bg-white hover:text-black'
@@ -43,7 +45,7 @@ const Banner = () => {
                   }`}
                 >
                   {button.text}
-                </button>
+                </Link>
               </div>
             ))}
         </div>

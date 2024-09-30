@@ -7,15 +7,20 @@ import '../../css/buttonStyle.css';
 import '../../css/buttonStyle1.css';
 import { BsCartPlus } from 'react-icons/bs';
 import { CartContext } from '../context/CartContext'; // Import the Cart Context
+import axios from 'axios'; // Import axios for API requests
+import { useNavigate } from 'react-router-dom'; // For navigation
+import { Link } from 'react-router-dom';
 
 const FoodItems = () => {
-  const { heading5, foodItems, buttons3 } = foodData;
+  const [foodItem, setFoodItem] = useState([]);
+  const { heading5, buttons3 } = foodData;
   const { addToCart } = useContext(CartContext); // Get the addToCart function from context
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track authentication status
   const [buttonState, setButtonState] = useState(buttons3);
   const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
   const [visible, setVisible] = useState(true);
   const foodItemsRef = useRef(null);
+  const navigate = useNavigate(); // Initialize navigation
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: false });
@@ -45,6 +50,39 @@ const FoodItems = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    // Fetch food items from the backend API
+    const fetchFoodItems = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/products'); // Adjust the endpoint if necessary
+        if (Array.isArray(response.data)) {
+          setFoodItem(response.data); // Set the fetched food items
+        }
+      } catch (error) {
+        console.error('Error fetching food items:', error);
+      }
+    };
+
+    fetchFoodItems();
+  }, []);
+
+  // Check if the user is authenticated on component mount
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:5000/check-session', // Updated endpoint
+          { withCredentials: true }
+        );
+        setIsAuthenticated(response.data.isLoggedIn); // Update the authentication status based on the response
+      } catch (error) {
+        setIsAuthenticated(false);
+      }
+    };
+
+    checkAuthentication();
+  }, []);
+
   const handleButtonClick = (index) => {
     const updatedButtons = buttonState.map((button, i) =>
       i === index ? { ...button, value: true } : { ...button, value: false }
@@ -52,8 +90,20 @@ const FoodItems = () => {
     setButtonState(updatedButtons);
   };
 
-  const handleAddToCart = (item) => {
-    addToCart(item); // Add the selected item to the cart using context
+  const handleAddToCart = async (item) => {
+    if (!isAuthenticated) {
+      console.log('User is not authenticated, redirecting to login.');
+      navigate('/login'); // Redirect to login page if not authenticated
+      return;
+    }
+
+    try {
+      // Add item to cart using API and CartContext
+      await addToCart(item); // Add item to cart in context
+      console.log('Item added to cart successfully.');
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+    }
   };
 
   return (
@@ -81,56 +131,63 @@ const FoodItems = () => {
         className="flex flex-wrap lg:justify-center mt-10"
         ref={foodItemsRef}
       >
-        {foodItems.map((item) => (
-          <div
-            key={item.id} // Use item.id as the unique key
-            className={`group w-11/12 lg:max-w-xs rounded overflow-hidden shadow-lg mx-3 my-2 relative ${
-              visible ? 'fade-in' : 'fade-out'
-            }`}
-            data-aos="fade-up"
-            data-aos-anchor-placement="top-bottom"
-          >
-            <div className="absolute top-0 flex justify-between w-full z-10">
-              <div className="flex items-center">
-                <FaRegHeart className="text-4xl text-red-500 rounded-full border border-white bg-white p-1 mt-5 ml-3" />
+        {foodItem.length > 0 ? (
+          foodItem.map((item) => (
+            <div
+              key={item.id} // Use item.id as the unique key
+              className={`group w-11/12 lg:max-w-xs rounded overflow-hidden shadow-lg mx-3 my-2 relative ${
+                visible ? 'fade-in' : 'fade-out'
+              }`}
+              data-aos="fade-up"
+              data-aos-anchor-placement="top-bottom"
+            >
+              <div className="absolute top-0 flex justify-between w-full z-10">
+                <div className="flex items-center">
+                  <FaRegHeart className="text-4xl text-red-500 rounded-full border border-white bg-white p-1 mt-5 ml-3" />
+                </div>
+                <div className="flex items-center">
+                  <p className="text-xl border border-black bg-black text-white rounded-lg p-1 mr-3 mt-5">
+                    20% off
+                  </p>
+                </div>
               </div>
-              <div className="flex items-center">
-                <p className="text-xl border border-black bg-black text-white rounded-lg p-1 mr-3 mt-5">
-                  20% off
+
+              <img
+                className="w-full transition-transform duration-300 transform group-hover:scale-105"
+                src={item.image_link}
+                alt={item.title}
+              />
+              <div className="px-6 py-4">
+                <div className="font-bold text-lg mb-2">{item.title}</div>
+                <p className="text-gray-700 text-base">{item.description}</p>
+                <p className="text-gray-900 text-base font-semibold mt-2">
+                  ${item.price} {/* Ensure the correct field name for price */}
                 </p>
               </div>
-            </div>
-
-            <img
-              className="w-full transition-transform duration-300 transform group-hover:scale-105"
-              src={item.image}
-              alt={item.title}
-            />
-            <div className="px-6 py-4">
-              <div className="font-bold text-xl mb-2">{item.title}</div>
-              <p className="text-gray-700 text-base">{item.description}</p>
-              <p className="text-gray-900 text-base font-semibold mt-2">
-                ${item.Price} {/* Check if item.Price is correct */}
-              </p>
-            </div>
-            <div className="px-6 py-4">
-              <div className="mb-5">
-                <button
-                  className="bg-transparent border border-gray-500 text-gray-500 font-bold py-3 px-10 rounded-lg flex items-center justify-start transition duration-500 ease-in-out btn btn2 hover:bg-red-600 hover:border-red-600"
-                  onClick={() => handleAddToCart(item)} // Add item to cart on click
-                >
-                  <BsCartPlus className="mr-2 text-2xl" />
-                  <span>{item.button}</span>
-                </button>
+              <div className="px-6 py-4">
+                <div className="mb-5">
+                  <button
+                    className="bg-transparent border border-gray-500 text-gray-500 font-bold py-3 px-10 rounded-lg flex items-center justify-start transition duration-500 ease-in-out btn btn2 hover:bg-red-600 hover:border-red-600"
+                    onClick={() => handleAddToCart(item)} // Add item to cart on click
+                  >
+                    <BsCartPlus className="mr-2 text-2xl" />
+                    <span>Add to Cart</span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p>No food items available.</p>
+        )}
       </div>
 
-      <button className="mt-10 mx-auto bg-primary-color border text-black border-red-500 w-48 p-3 rounded-lg btn btn1 transition duration-500 ease-in-out hover:bg-white hover:text-red-600 block">
+      <Link
+        to="/menu"
+        className="mt-10 mx-auto bg-primary-color border text-black border-red-500 w-48 p-3 rounded-lg btn btn1 transition duration-500 ease-in-out hover:bg-white hover:text-red-600 block text-center"
+      >
         Browse All
-      </button>
+      </Link>
 
       <div className="mb-32"></div>
     </div>

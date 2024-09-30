@@ -6,6 +6,7 @@ import backgroundImage from '../../assets/categories-bg.png';
 import data from '../../data.json';
 import '../../css/buttonStyle.css';
 import '../../css/crafting.css';
+import { Link } from 'react-router-dom';
 
 const Categories = () => {
   const [scrollDirection, setScrollDirection] = useState('down');
@@ -52,9 +53,12 @@ const Categories = () => {
       <div className="max-w-screen-xl mx-auto overflow-hidden">
         <div className="flex flex-col md:flex-row justify-between md:items-center mb-6 mt-16">
           <h1 className="text-3xl lg:text-5xl font-bold">{title}</h1>
-          <button className="mt-10 bg-transparent border text-black border-black w-32 p-3 rounded-lg btn btn2 transition duration-500 ease-in-out hover:bg-primary-color hover:text-white">
+          <Link
+            to="/menu"
+            className="mt-10 bg-transparent border text-black border-black w-32 p-3 rounded-lg btn btn2 transition duration-500 ease-in-out hover:bg-primary-color hover:text-white"
+          >
             Browse All
-          </button>
+          </Link>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-4 md:gap-6">
           {categories.map((category, index) => (
