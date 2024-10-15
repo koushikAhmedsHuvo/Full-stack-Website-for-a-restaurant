@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FiMinus } from 'react-icons/fi';
 import { FaPlus } from 'react-icons/fa';
 import { RxCross1 } from 'react-icons/rx';
+import axios from 'axios';
 import { CartContext } from '../context/CartContext'; // Adjust the path if needed
 
 const OrderDetails = () => {
-  const { cart, removeFromCart, updateQuantity } = useContext(CartContext);
+  const { cart, removeFromCart, updateQuantity, clearCart } =
+    useContext(CartContext);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Add state to track authentication
 
   // Function to calculate the total price
   const getTotalPrice = () => {
@@ -32,15 +35,59 @@ const OrderDetails = () => {
     }
   };
 
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:5000/check-session',
+          { withCredentials: true }
+        );
+        setIsAuthenticated(response.data.isLoggedIn);
+      } catch (error) {
+        setIsAuthenticated(false);
+      }
+    };
+
+    checkAuthentication();
+  }, []);
+
+  // Handle "Check in" button click
+  const handleCheckIn = async () => {
+    if (!isAuthenticated) {
+      alert('You need to be logged in to place an order.');
+      return;
+    }
+
+    // Prepare the order data based on what your backend expects
+    const orderData = {
+      cart: cart.map((item) => ({
+        item_id: item.id, // Ensure this matches your backend's expected key
+        quantity: item.quantity || 1, // Ensure quantity is provided
+      })),
+    };
+
+    try {
+      const response = await axios.post(
+        'http://localhost:5000/order',
+        orderData,
+        {
+          withCredentials: true, // Include credentials with the request
+        }
+      );
+      alert(response.data.message); // Notify success
+      clearCart(); // Clear the cart after successful order
+    } catch (error) {
+      alert(error.response?.data?.error || 'Failed to place order');
+    }
+  };
+
   return (
     <div className="w-full mx-auto p-8 font-Barlow mb-28 mt-14">
       <h1 className="text-2xl font-semibold mb-6">An Overview of Your Data</h1>
 
       <div className="flex flex-row space-x-8">
-        {/* Conditionally render cart items or empty message */}
         {cart.length > 0 ? (
           <>
-            {/* Cart Items */}
             <div className="flex-1 bg-white p-6 rounded-lg shadow-md border border-gray-300">
               <div className="flex flex-col space-y-6">
                 {cart.map((item) => (
@@ -89,7 +136,6 @@ const OrderDetails = () => {
               </div>
             </div>
 
-            {/* Order Summary and Check-in Button */}
             <div className="flex flex-col items-center">
               <div className="w-80 bg-white p-6 rounded-lg shadow-md border border-gray-300 mb-4">
                 <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
@@ -104,7 +150,10 @@ const OrderDetails = () => {
                   </span>
                 </div>
               </div>
-              <button className="w-80 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition">
+              <button
+                className="w-80 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition"
+                onClick={handleCheckIn} // Call the function to handle the check-in
+              >
                 Check in
               </button>
             </div>

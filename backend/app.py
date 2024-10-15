@@ -98,6 +98,19 @@ def create_tables():
             cursor.execute(create_reserved_tables_query)
 
 
+            create_order_tables_query = """
+            CREATE TABLE IF NOT EXISTS orders (
+               id INT AUTO_INCREMENT PRIMARY KEY,
+               user_id INT,  
+               item_id INT NOT NULL,
+               quantity INT NOT NULL,
+               created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+               FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+               FOREIGN KEY (item_id) REFERENCES products(id) ON DELETE CASCADE
+            );
+            """
+            cursor.execute(create_order_tables_query)
+
             create_pickup_tables_query = """
             CREATE TABLE IF NOT EXISTS pickups (
                id INT AUTO_INCREMENT PRIMARY KEY,
@@ -111,6 +124,23 @@ def create_tables():
             );
             """
             cursor.execute(create_pickup_tables_query)
+
+
+            create_rating_tables_query = """
+         CREATE TABLE IF NOT EXISTS rating (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            user_id INT,  
+            item_id INT NOT NULL,
+            rating INT CHECK (rating >= 1 AND rating <= 5),
+            comment TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY (item_id) REFERENCES products(id) ON DELETE CASCADE
+    );
+    """
+            cursor.execute(create_rating_tables_query)
+   
+
 
             connection.commit()
             cursor.close()
@@ -233,7 +263,7 @@ def get_user():
 @app.route('/check-session', methods=['GET'])
 def check_session():
     if 'user_id' in session:
-        return jsonify({'isLoggedIn': True, 'email': session.get('user_email')}), 200
+        return jsonify({'isLoggedIn': True,"userId": session['user_id'], 'email': session.get('user_email')}), 200
     return jsonify({'isLoggedIn': False}), 200
 
 # update user information
@@ -482,7 +512,128 @@ def store_pickup():
         if connection:
             connection.close()
 
- 
+
+
+@app.route('/order', methods=['POST'])
+def create_order():
+    # Retrieve the user_id from the session
+    user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({'error': 'User not authenticated'}), 401
+
+    # Get the JSON data from the request
+    data = request.json
+    if not data or 'cart' not in data:
+        return jsonify({'error': 'No order data provided'}), 400
+
+    try:
+        # Connect to the database
+        connection = get_db_connection()
+        cursor = connection.cursor()
+
+        # Iterate through the cart items and insert each as an order
+        for item in data['cart']:
+            insert_order_query = '''
+                INSERT INTO orders (user_id, item_id, quantity)
+                VALUES (%s, %s, %s)
+            '''
+            cursor.execute(insert_order_query, (
+                user_id,
+                item['item_id'],  # Product ID
+                item.get('quantity', 1)  # Default to 1 if quantity is not provided
+            ))
+
+        # Commit the transaction to save the order
+        connection.commit()
+
+        return jsonify({'message': 'Order created successfully'}), 201
+
+    except Exception as e:
+        # Rollback in case of error
+        connection.rollback()
+        return jsonify({'error': str(e)}), 500
+
+    finally:
+        # Ensure the connection is always closed
+        connection.close()
+
+
+
+@app.route('/order-history', methods=['GET'])
+def get_order_history():
+    user_id = session.get('user_id')  # Retrieve user_id from session
+    if user_id is None:
+        return jsonify({"error": "User not logged in"}), 401  # Unauthorized access
+
+    connection = get_db_connection()
+    if connection:
+        try:
+            with connection.cursor() as cursor:
+                # Query to fetch order details with associated product information
+                query = """
+                SELECT o.id AS order_id, o.quantity, o.created_at, 
+                       p.title, p.price,p.image_link
+                FROM orders o
+                JOIN products p ON o.item_id = p.id
+                WHERE o.user_id = %s
+                ORDER BY o.created_at DESC;
+                """
+                cursor.execute(query, (user_id,))
+                orders = cursor.fetchall()
+                return jsonify(orders), 200
+        except Exception as e:
+            print(f"Error fetching order history: {e}")
+            return jsonify({"error": "Internal server error"}), 500
+        finally:
+            connection.close()
+    else:
+        return jsonify({"error": "Database connection error"}), 500
+
+
+
+@app.route('/submit-rating', methods=['POST'])
+def submit_rating():
+    try:
+        user_id = session.get('user_id')
+        if not user_id:
+            return jsonify({"error": "User not authenticated"}), 401
+
+        data = request.get_json()
+        item_id = data.get('item_id')
+        rating = data.get('rating')
+        comment = data.get('comment')
+
+        # Input validation
+        if not all([item_id, isinstance(item_id, int), rating in range(1, 6), comment]):
+            return jsonify({"error": "Invalid input."}), 400
+
+        connection = get_db_connection()
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            INSERT INTO rating (user_id, item_id, rating, comment)
+            VALUES (%s, %s, %s, %s);
+        """, (user_id, item_id, rating, comment))
+        connection.commit()
+
+        return jsonify({"message": "Rating and comment submitted successfully!"}), 201
+
+    except pymysql.MySQLError:
+        return jsonify({"error": "A database error occurred."}), 500
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": "An error occurred while submitting rating and comment."}), 500
+
+    finally:
+        if cursor: cursor.close()
+        if connection: connection.close()
+
+
+
+
+
+
 
 
 

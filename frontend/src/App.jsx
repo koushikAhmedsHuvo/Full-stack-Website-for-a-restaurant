@@ -11,6 +11,7 @@ import UserPage from './components/Page/UserPage';
 import Cart from './components/Page/Cart';
 import PickupPage from './components/Page/PickupPage';
 import ReservationPage from './components/Page/ReservationPage';
+import OrderHistory from './components/Home1/OrderHistory';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/reserve" element={<ReservationPage />} />
           <Route path="/pickup" element={<PickupPage />} />
+          <Route path="/history" element={<OrderHistory />} />
         </Routes>
       </Router>
     </>
