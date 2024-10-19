@@ -103,8 +103,8 @@
       "text": "now on sale.",
       "url": "#"
     },
-    "phoneNumber": "+8801703375052",
-    "email": "koushika608@gmail.com"
+    "phoneNumber": "+17077970462",
+    "email": "Quomodosoft@gmail.com"
   },
   "foodItems": [
     {
@@ -391,17 +391,17 @@
             "width": "w-12"
           },
           {
-            "src": "https://i.ibb.co/vx6B76z/visa.png",
+            "src": "https://i.ibb.co.com/D5J8nrR/download.png",
             "alt": "Visa",
             "width": "w-12"
           },
           {
-            "src": "https://i.ibb.co/vx6B76z/visa.png",
+            "src": "https://i.ibb.co.com/MZ3fwRP/download-1.png",
             "alt": "Visa",
             "width": "w-12"
           },
           {
-            "src": "https://i.ibb.co/vx6B76z/visa.png",
+            "src": "https://i.ibb.co.com/khKCPkn/download-2.png",
             "alt": "Visa",
             "width": "w-12"
           }
@@ -460,18 +460,18 @@
         "icon": "PiHamburger"
       },
       {
-        "title": "Delish Burger",
-        "itemCount": 25,
+        "title": "Pizza",
+        "itemCount": 7,
         "icon": "PiHamburger"
       },
       {
-        "title": "Delish Burger",
-        "itemCount": 25,
+        "title": "Rice Bowl",
+        "itemCount": 10,
         "icon": "PiHamburger"
       },
       {
-        "title": "Delish Burger",
-        "itemCount": 25,
+        "title": "Ice Cream",
+        "itemCount": 7,
         "icon": "PiHamburger"
       }
     ],

@@ -4,27 +4,28 @@ import { FaPlus } from 'react-icons/fa';
 import { RxCross1 } from 'react-icons/rx';
 import axios from 'axios';
 import { CartContext } from '../context/CartContext'; // Adjust the path if needed
+import MessageModal from '../Home1/MessageModal'; // Import the MessageModal component
 
 const OrderDetails = () => {
   const { cart, removeFromCart, updateQuantity, clearCart } =
     useContext(CartContext);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Add state to track authentication
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
+  const [modalMessage, setModalMessage] = useState(''); // State for the message
+  const [modalType, setModalType] = useState('success'); // State for modal type (success/error)
 
-  // Function to calculate the total price
   const getTotalPrice = () => {
     return cart.reduce((total, item) => {
-      const price = parseFloat(item.price) || 0; // Ensure the price is a number
-      const quantity = item.quantity || 1; // Default to 1 if quantity is not available
+      const price = parseFloat(item.price) || 0;
+      const quantity = item.quantity || 1;
       return total + price * quantity;
     }, 0);
   };
 
-  // Handle item removal
   const handleRemove = (itemId) => {
     removeFromCart(itemId);
   };
 
-  // Handle quantity changes
   const handleQuantityChange = (itemId, increment) => {
     const item = cart.find((item) => item.id === itemId);
     const newQuantity = increment
@@ -51,18 +52,18 @@ const OrderDetails = () => {
     checkAuthentication();
   }, []);
 
-  // Handle "Check in" button click
   const handleCheckIn = async () => {
     if (!isAuthenticated) {
-      alert('You need to be logged in to place an order.');
+      setModalMessage('You need to be logged in to place an order.');
+      setModalType('error');
+      setModalVisible(true);
       return;
     }
 
-    // Prepare the order data based on what your backend expects
     const orderData = {
       cart: cart.map((item) => ({
-        item_id: item.id, // Ensure this matches your backend's expected key
-        quantity: item.quantity || 1, // Ensure quantity is provided
+        item_id: item.id,
+        quantity: item.quantity || 1,
       })),
     };
 
@@ -71,14 +72,22 @@ const OrderDetails = () => {
         'http://localhost:5000/order',
         orderData,
         {
-          withCredentials: true, // Include credentials with the request
+          withCredentials: true,
         }
       );
-      alert(response.data.message); // Notify success
-      clearCart(); // Clear the cart after successful order
+      setModalMessage(response.data.message);
+      setModalType('success');
+      clearCart();
     } catch (error) {
-      alert(error.response?.data?.error || 'Failed to place order');
+      setModalMessage(error.response?.data?.error || 'Failed to place order');
+      setModalType('error');
+    } finally {
+      setModalVisible(true); // Show the modal regardless of success or failure
     }
+  };
+
+  const closeModal = () => {
+    setModalVisible(false); // Hide the modal
   };
 
   return (
@@ -152,7 +161,7 @@ const OrderDetails = () => {
               </div>
               <button
                 className="w-80 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition"
-                onClick={handleCheckIn} // Call the function to handle the check-in
+                onClick={handleCheckIn}
               >
                 Check in
               </button>
@@ -162,6 +171,15 @@ const OrderDetails = () => {
           <p className="text-lg text-gray-600">No items in the cart</p>
         )}
       </div>
+
+      {/* Render the MessageModal */}
+      {modalVisible && (
+        <MessageModal
+          message={modalMessage}
+          onClose={closeModal}
+          type={modalType}
+        />
+      )}
     </div>
   );
 };

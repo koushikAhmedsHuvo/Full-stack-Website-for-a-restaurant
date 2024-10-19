@@ -111,22 +111,7 @@ const FoodItems = () => {
       <h1 className="text-3xl text-center w-11/12 ml-1 mt-10 lg:text-center lg:text-4xl lg:mt-16 lg:w-2/6">
         {heading5}
       </h1>
-      {/* button div */}
-      <div className="grid grid-cols-4 w-11/12 lg:w-auto lg:grid-flow-col gap-1 lg:gap-3 border rounded-xl ml-1 p-1 mt-5 lg:p-3 lg:mt-10">
-        {buttonState.map((button, index) => (
-          <div key={index}>
-            <button
-              className={`${
-                button.value ? 'bg-red-500' : 'bg-transparent'
-              } px-2 py-2 rounded-lg`}
-              onClick={() => handleButtonClick(index)}
-            >
-              {button.text}
-            </button>
-          </div>
-        ))}
-      </div>
-      {/* food item */}
+
       <div
         className="flex flex-wrap lg:justify-center mt-10"
         ref={foodItemsRef}
@@ -181,14 +166,12 @@ const FoodItems = () => {
           <p>No food items available.</p>
         )}
       </div>
-
       <Link
         to="/menu"
         className="mt-10 mx-auto bg-primary-color border text-black border-red-500 w-48 p-3 rounded-lg btn btn1 transition duration-500 ease-in-out hover:bg-white hover:text-red-600 block text-center"
       >
         Browse All
       </Link>
-
       <div className="mb-32"></div>
     </div>
   );

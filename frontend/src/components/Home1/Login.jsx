@@ -3,6 +3,7 @@ import loginData from '../../data1.json';
 import Logo from '../../assets/logo2.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import ForgotPasswordModal from './ForgotPasswordModal'; // Import the modal
 
 const Login = () => {
   const { leftSection, rightSection } = loginData;
@@ -12,6 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false); // State to control modal visibility
 
   // Check session on mount
   useEffect(() => {
@@ -53,7 +55,7 @@ const Login = () => {
         setSuccessMessage('Login successful!');
         setTimeout(() => {
           navigate('/'); // Redirect to home page
-        }, 1500);
+        }, 1000);
       }
     } catch (err) {
       if (err.response && err.response.data) {
@@ -62,6 +64,14 @@ const Login = () => {
         setError('An error occurred. Please try again.');
       }
     }
+  };
+
+  const openForgotPasswordModal = () => {
+    setShowForgotPasswordModal(true);
+  };
+
+  const closeForgotPasswordModal = () => {
+    setShowForgotPasswordModal(false);
   };
 
   return (
@@ -74,11 +84,14 @@ const Login = () => {
             alt="Illustration"
             className="w-full h-full object-cover"
           />
-          <img
-            src={Logo}
-            alt="logo"
-            className="absolute top-8 left-8 h-16 w-auto"
-          />
+          <Link to="/">
+            {/* Adjust the 'to' prop as needed */}
+            <img
+              src={Logo}
+              alt="logo"
+              className="absolute top-8 left-8 h-16 w-auto"
+            />
+          </Link>
           <div className="absolute bottom-4 left-4 right-4 text-xl text-black p-2 rounded-lg">
             <p className="leading-tight">
               {leftSection.termsText}{' '}
@@ -144,12 +157,13 @@ const Login = () => {
                   {rightSection.rememberMeLabel}
                 </label>
               </div>
-              <a
-                href={rightSection.forgotPasswordUrl}
+              <button
+                type="button"
+                onClick={openForgotPasswordModal}
                 className="text-primary-color hover:underline"
               >
                 {rightSection.forgotPasswordText}
-              </a>
+              </button>
             </div>
             <button
               type="submit"
@@ -173,6 +187,10 @@ const Login = () => {
           </form>
         </div>
       </div>
+      {/* Forgot Password Modal */}
+      {showForgotPasswordModal && (
+        <ForgotPasswordModal onClose={closeForgotPasswordModal} />
+      )}
     </div>
   );
 };

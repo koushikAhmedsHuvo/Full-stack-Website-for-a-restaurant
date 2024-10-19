@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
 import { PiHamburger } from 'react-icons/pi';
+import { FaPizzaSlice, FaBowlRice, FaIceCream } from 'react-icons/fa6';
 import backgroundImage from '../../assets/categories-bg.png';
 import data from '../../data.json';
 import '../../css/buttonStyle.css';
@@ -40,6 +41,14 @@ const Categories = () => {
 
   const { title, categories, promoBanners } = data.Categories;
 
+  // Define an array of icons
+  const icons = [
+    <PiHamburger />,
+    <FaPizzaSlice />,
+    <FaBowlRice />,
+    <FaIceCream />,
+  ];
+
   return (
     <div
       className="p-6 overflow-hidden"
@@ -68,7 +77,8 @@ const Categories = () => {
               className="flex flex-row items-center justify-center bg-grey-scale-100 p-8 rounded-xl shadow-md mt-8 categoryCard"
             >
               <div className="text-6xl mr-4 border rounded-full p-2 bg-white text-black">
-                <PiHamburger />
+                {/* Assign different icons based on index */}
+                {icons[index % icons.length]}
               </div>
               <div>
                 <h1 className="text-xl font-semibold">{category.title}</h1>

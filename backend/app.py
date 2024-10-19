@@ -1,13 +1,29 @@
 import pymysql
 from flask import Flask, request, jsonify, session, redirect, url_for, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from flask_cors import CORS
+from flask_mail import Mail, Message
+import os
+import jwt
+import random
+
 
 app = Flask(__name__)
 
 # CORS configuration
+# CORS configuration
 CORS(app, supports_credentials=True, resources={r"/*": {"origins": "http://localhost:5173"}})
+
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # Use Gmail's SMTP server
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'koushik101517@gmail.com'  # Your Gmail address
+app.config['MAIL_PASSWORD'] = 'nkwnfznfyeivakjv'  # Your Gmail App Password
+app.config['MAIL_DEFAULT_SENDER'] = 'koushik101517@gmail.com'  # Set the sender's email
+mail = Mail(app)
+
 
 app.config['SECRET_KEY'] = 'super_secure_random_secret_key'  # Use a strong key in production
 app.config['SESSION_COOKIE_SECURE'] = False  # Set to True in production with HTTPS
@@ -192,6 +208,12 @@ def signup():
             )
 
             connection.commit()
+
+            # Send confirmation email
+            msg = Message('Welcome to Our Service!', recipients=[email])
+            msg.body = f"Hi {firstname},\n\nThank you for signing up! Your account has been created successfully.\n\nBest regards,\nThe Reservq Team"
+            mail.send(msg)
+
             cursor.close()
             return jsonify({'message': 'User registered successfully.'}), 201
 
@@ -631,13 +653,91 @@ def submit_rating():
 
 
 
+# Store verification codes (In production, use a more persistent storage like a database)
+verification_codes = {}
+@app.route('/forgot_password', methods=['POST'])
+def forgot_password():
+    email = request.json.get('email')
+
+    # Validate email in the database
+    connection = get_db_connection()
+    if connection:
+        try:
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+            user = cursor.fetchone()
+
+            if not user:
+                return jsonify(success=False, message='Email not found.'), 404
+
+            # Generate a random verification code
+            verification_code = random.randint(100000, 999999)
+            verification_codes[email] = verification_code
+
+            msg = Message('Password Reset Request', recipients=[email])
+            msg.body = f'Your verification code is: {verification_code}'
+
+            try:
+                mail.send(msg)
+                return jsonify(success=True, message='Password reset link sent! Please check your email.'), 200
+            except Exception as e:
+                return jsonify(success=False, message='Failed to send email: ' + str(e)), 500
+
+        except pymysql.MySQLError as e:
+            return jsonify(success=False, message=str(e)), 500
+        finally:
+            cursor.close()
+            connection.close()
+    else:
+        return jsonify(success=False, message='Database connection failed.'), 500
 
 
 
+@app.route('/reset_password', methods=['POST'])
+def reset_password():
+    data = request.json
+    email = data.get('email')
+    code = data.get('code')
+    new_password = data.get('new_password')
+
+    # Validate input fields
+    if not all([email, code, new_password]):
+        return jsonify(success=False, message='All fields are required.'), 400
+
+    # Verify the code
+    if email in verification_codes and verification_codes[email] == int(code):
+        # Hash the new password
+        hashed_password = generate_password_hash(new_password)
+
+        # Update the user's password in the database
+        connection = get_db_connection()
+        if connection:
+            try:
+                cursor = connection.cursor()
+                cursor.execute(
+                    "UPDATE users SET password = %s WHERE email = %s",
+                    (hashed_password, email)
+                )
+                connection.commit()
+
+                # Remove the code after successful use
+                del verification_codes[email]
+
+                return jsonify(success=True, message='Password has been reset!'), 200
+
+            except pymysql.MySQLError as e:
+                connection.rollback()
+                return jsonify(success=False, message='Database error: ' + str(e)), 500
+            finally:
+                cursor.close()
+                connection.close()
+        else:
+            return jsonify(success=False, message='Database connection failed.'), 500
+    else:
+        return jsonify(success=False, message='Invalid verification code!'), 400
 
 
 
-  
 
 if __name__ == '__main__':
     app.run(debug=True)

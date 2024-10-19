@@ -64,11 +64,14 @@ const Signup = () => {
             alt="Illustration"
             className="w-full h-full object-cover"
           />
-          <img
-            src={Logo}
-            alt="logo"
-            className="absolute top-8 left-8 h-16 w-auto"
-          />
+          <Link to="/">
+            {/* Adjust the 'to' prop as needed */}
+            <img
+              src={Logo}
+              alt="logo"
+              className="absolute top-8 left-8 h-16 w-auto"
+            />
+          </Link>
           <div className="absolute bottom-4 left-4 right-4 text-xl text-black p-2 rounded-lg">
             <p className="leading-tight">
               {leftSection1.termsText}{' '}
